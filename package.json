@@ -1,0 +1,24 @@
+{
+    "name": "n1ql-snippets",
+    "displayName": "N1QL-Snippets",
+    "description": "Provides a convenient and express way to code N1QL queries.",
+    "version": "1.0.0",
+    "engines": {
+        "vscode": "^1.46.0"
+    },
+    "categories": [
+        "Snippets"
+    ],
+    "contributes": {
+        "snippets": [
+            {
+                "language": "plaintext",
+                "path": "./snippets/snippets.code-snippets"
+            },
+            {
+                "language": "sql",
+                "path": "./snippets/snippets.code-snippets"
+            }
+        ]
+    }
+}
