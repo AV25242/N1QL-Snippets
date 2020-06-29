@@ -1,0 +1,57 @@
+{
+  "n1ql-ssf": {
+    "prefix": "n1ql-ssf",
+    "body": [
+      "SELECT *",
+      "FROM `${1:bucket}`"
+    ],
+    "description": "select all fields"
+  },
+  "n1ql-select": {
+    "prefix": "n1ql-select",
+    "body": [
+      "SELECT ${1|ALL,DISTINCT,RAW|} ${2:field}",
+      "FROM `${3:bucket}`"
+    ],
+    "description": "SELECT ALL retrieves all of the data specified and will result in all of the specified columns, including all duplicates.\n SELECT DISTINCT removes duplicate result objects from the query’s result set.\n SELECT RAW reduces the amount of data returned by eliminating the field attribute."
+  },
+  "n1ql-let": {
+    "prefix": "n1ql-let",
+    "body": [
+      "SELECT ${1/(.)[^_]*(?:_(.))?.*/$1/}.*",
+      "FROM `${1:bucket}` AS ${1/(.)[^_]*(?:_(.))?.*/$1/}",
+      "LET ${3:variable} = ${4:value}",
+      "WHERE ${5:predicate} > $3; "
+    ],
+    "description": "Use LET to create variables for later use within a query"
+  },
+  "n1ql-top": {
+    "prefix": "n1ql-top",
+    "body": [
+      "SELECT *",
+      "FROM `${1:bucket}`",
+      "LIMIT ${2:1};"
+    ],
+    "description": "The LIMIT clause specifies the maximum number of documents to be returned \n in a resultset by a SELECT statement."
+  },
+  "n1ql-distinct": {
+    "prefix": "n1ql-distinct",
+    "body": [
+      "SELECT DISTINCT ${2:field}",
+      "FROM `${1:bucket}`"
+    ],
+    "description": "The DISTINCT clause lets you select distinct element"
+  },
+  "n1ql-select-array": {
+    "prefix": "n1ql-select-array",
+    "body": [
+      "SELECT ARRAY ele ",
+      "FOR ele in  ${1/(.)[^_]*(?:_(.))?.*/$1/}.${2:array} END ",
+      "FROM `${1:bucket}` ${1/(.)[^_]*(?:_(.))?.*/$1/}  "
+    ],
+    "description":"SELECT array from a bucket"
+  }
+  
+}
+
+
