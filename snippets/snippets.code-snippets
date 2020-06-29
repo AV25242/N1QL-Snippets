@@ -26,14 +26,14 @@
     "description": "Use LET to create variables for later use within a query"
   },
   "n1ql-top": {
-    "prefix": "n1ql-top",
-    "body": [
-      "SELECT *",
-      "FROM `${1:bucket}`",
-      "LIMIT ${2:1};"
-    ],
-    "description": "The LIMIT clause specifies the maximum number of documents to be returned \n in a resultset by a SELECT statement."
-  },
+	  "prefix": "n1ql-top",
+	  "body": [
+		"SELECT *",
+		"FROM `${1:bucket}`",
+		"LIMIT ${2:1};"
+	  ],
+	  "description": "The LIMIT clause is like TOP clause \n in traditional SQL \n it specifies the maximum number of documents to be returned \n in a resultset by a SELECT statement."
+	},
   "n1ql-distinct": {
     "prefix": "n1ql-distinct",
     "body": [
@@ -50,6 +50,34 @@
       "FROM `${1:bucket}` ${1/(.)[^_]*(?:_(.))?.*/$1/}  "
     ],
     "description":"SELECT array from a bucket"
+  },
+  "n1ql-where": {
+    "prefix": "n1ql-where",
+    "body": [
+      "SELECT ${1/(.)[^_]*(?:_(.))?.*/$1/}.*",
+      "FROM `${1:bucket}` AS ${1/(.)[^_]*(?:_(.))?.*/$1/}",
+      "WHERE ${1/(.)[^_]*(?:_(.))?.*/$1/}.${2:field} = ${3:value}"
+    ],
+    "description": "The WHERE clause filters resultsets based specified conditions."
+  },
+  "n1ql-where-and": {
+    "prefix": "n1ql-where-and",
+    "body": [
+      "SELECT ${1/(.)[^_]*(?:_(.))?.*/$1/}.*",
+      "FROM `${1:bucket}` AS ${1/(.)[^_]*(?:_(.))?.*/$1/}",
+      "WHERE ${1/(.)[^_]*(?:_(.))?.*/$1/}.${2:field} = ${3:value}",
+      "AND ${1/(.)[^_]*(?:_(.))?.*/$1/}.${4:field} = ${5:value}"
+    ],
+    "description": "The WHERE clause filters resultsets based specified conditions."
+  },
+  "n1ql-where-contains": {
+    "prefix": "n1ql-where-contains",
+    "body": [
+      "SELECT ${1/(.)[^_]*(?:_(.))?.*/$1/}.*",
+      "FROM `${1:bucket}` AS ${1/(.)[^_]*(?:_(.))?.*/$1/}",
+      "WHERE CONTAINS(${1/(.)[^_]*(?:_(.))?.*/$1$2/}.${2:field} , ${3:value})"
+    ],
+    "description": "The WHERE clause filters resultsets based specified conditions."
   }
   
 }
