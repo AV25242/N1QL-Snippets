@@ -78,7 +78,16 @@
       "WHERE CONTAINS(${1/(.)[^_]*(?:_(.))?.*/$1$2/}.${2:field} , ${3:value})"
     ],
     "description": "The WHERE clause filters resultsets based specified conditions."
-  }
+  },
+  "n1ql-grby": {
+		"prefix": "n1ql-grby",
+		"body": [
+		  "SELECT ${3/(.)[^_]*(?:_(.))?.*/$1$2$3/}.${4//$4/} , ${1|Count,Avg,Max,Min,Mean,Median,Sum|}(${2:field}) AS  `${2}${1}`",
+		  "FROM `${3:bucket}` AS ${3/(.)[^_]*(?:_(.))?.*/$1$2$3/}",
+		  "GROUP BY ${4:field}"
+		],
+		"description": "The GROUP BY clause arranges \n aggregate values into groups, \n based on one or more fields"
+	  }
   
 }
 
